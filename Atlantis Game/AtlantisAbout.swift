@@ -25,9 +25,7 @@ struct AtlantisAbout: View {
                     .font(.title3)
                     .padding()
 
-                WaveView(waveOffset: waveOffset)
-                    .frame(height: 150)
-                    .opacity(0.5)
+               
 
                 Spacer()
 
@@ -65,27 +63,7 @@ struct AtlantisAbout: View {
     }
 }
 
-struct WaveView: View {
-    var waveOffset: Angle
 
-    var body: some View {
-        GeometryReader { geo in
-            Path { path in
-                let width = geo.size.width
-                let height = geo.size.height
-                let midHeight = height / 2
-
-                path.move(to: CGPoint(x: 0, y: midHeight))
-                for x in stride(from: 0, through: width, by: 1) {
-                    let angle = Double(x) / width * 2 * .pi + waveOffset.radians
-                    let y = midHeight + sin(angle) * 20
-                    path.addLine(to: CGPoint(x: x, y: y))
-                }
-            }
-            .stroke(Color.cyan.opacity(0.7), lineWidth: 3)
-        }
-    }
-}
 
 #Preview {
     AtlantisAbout()
